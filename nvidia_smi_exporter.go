@@ -48,11 +48,10 @@ func metrics(response http.ResponseWriter, request *http.Request) {
         for idx, value := range row[2:] {
             result = fmt.Sprintf(
                 "%s%s{gpu=\"%s\"} %s\n", result,
-                metricList[idx], name, value)
+                strings.Replace(metricList[idx], ".", "_", -1), name, value)
         }
     }
-
-    fmt.Fprintf(response, strings.Replace(result, ".", "_", -1))
+    fmt.Fprintf(response, strings.Replace(result, "", "", -1))
 }
 
 func main() {
