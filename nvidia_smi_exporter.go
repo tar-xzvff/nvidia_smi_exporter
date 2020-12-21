@@ -36,8 +36,7 @@ func metrics(response http.ResponseWriter, request *http.Request) {
     }
 
     metricList := []string {
-        "temperature.gpu", "utilization.gpu",
-        "utilization.memory", "memory.total", "memory.free", "memory.used"}
+        "timestamp", "temperature.gpu", "utilization.gpu", "utilization.memory", "memory.total", "memory.free", "memory.used", "clocks_throttle_reasons.sw_power_cap", "clocks_throttle_reasons.sw_thermal_slowdown", "clocks.current.graphics", "temperature.memory", "power.draw"}
 
     result := ""
     for _, row := range records {
