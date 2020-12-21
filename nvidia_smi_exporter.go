@@ -18,7 +18,7 @@ import (
 func metrics(response http.ResponseWriter, request *http.Request) {
     out, err := exec.Command(
         "nvidia-smi",
-        "--query-gpu=name,index,timestamp,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used,clocks_throttle_reasons.sw_power_cap,clocks_throttle_reasons.sw_thermal_slowdown,clocks.current.graphics,temperature.gpu,temperature.memory,power.draw",
+        "--query-gpu=name,index,timestamp,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used,clocks_throttle_reasons.sw_power_cap,clocks_throttle_reasons.sw_thermal_slowdown,clocks.current.graphics,temperature.memory,power.draw",
         "--format=csv,noheader,nounits").Output()
 
     if err != nil {
@@ -36,7 +36,11 @@ func metrics(response http.ResponseWriter, request *http.Request) {
     }
 
     metricList := []string {
-        "timestamp", "temperature.gpu", "utilization.gpu", "utilization.memory", "memory.total", "memory.free", "memory.used", "clocks_throttle_reasons.sw_power_cap", "clocks_throttle_reasons.sw_thermal_slowdown", "clocks.current.graphics", "temperature.memory", "power.draw"}
+    	"timestamp",
+        "temperature.gpu", "utilization.gpu",
+        "utilization.memory", "memory.total", "memory.free", "memory.used",
+        "clocks_throttle_reasons.sw_power_cap", "clocks_throttle_reasons.sw_thermal_slowdown", "clocks.current.graphics",
+        "temperature.memory", "power.draw"}
 
     result := ""
     for _, row := range records {
